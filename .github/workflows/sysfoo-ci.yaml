@@ -1,6 +1,9 @@
 name: sysfoo-ci
-on: [push]
-jobs:
+on:
+  push:
+    branches:
+      - 'master'
+     jobs:
   sysfoo-ci-jb:
     runs-on: ubuntu-latest
     steps:
@@ -21,3 +24,11 @@ jobs:
         
       - name: View file
         run: ls -lrt target
+      
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sysfoo artifact
+          path: target/**.war
+
+      
